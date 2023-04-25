@@ -42,9 +42,8 @@ export class MergeAsyncIterable<T> extends AsyncIterableX<T> {
         nexts[index] = <Promise<MergeResult<IteratorResult<T>>>>NEVER_PROMISE;
         active--;
       } else {
-        const iterator$ = iterators[index];
-        nexts[index] = wrapPromiseWithIndex(iterator$.next(), index);
         yield value$;
+        nexts[index] = wrapPromiseWithIndex(iterators[index].next(), index);
       }
     }
   }
